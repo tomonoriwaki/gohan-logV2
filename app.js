@@ -7,7 +7,16 @@ const SAVED_POSTS_KEY = "mogu-log-saved-posts-v2";
 const config = window.MOGU_SUPABASE_CONFIG || {};
 const hasSupabaseConfig = Boolean(config.url && config.anonKey);
 const supabaseClient =
-  hasSupabaseConfig && window.supabase ? window.supabase.createClient(config.url, config.anonKey) : null;
+  hasSupabaseConfig && window.supabase
+    ? window.supabase.createClient(config.url, config.anonKey, {
+        auth: {
+          persistSession: true,
+          autoRefreshToken: true,
+          detectSessionInUrl: true,
+          storageKey: "mogu-log-auth-session",
+        },
+      })
+    : null;
 const storageBucket = config.storageBucket || "post-images";
 
 const demoPosts = [
