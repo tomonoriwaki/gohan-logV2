@@ -42,9 +42,9 @@
       <section class="intro">
         <div>
           <p class="eyebrow">Mogu Moment</p>
-          <h2>おいしかった瞬間を、Googleログインで気軽に残そう。</h2>
+          <h2>おいしかった瞬間を、Googleアカウントで気軽に残そう。</h2>
           <p>
-            メール認証は不要です。Googleアカウントで連携すると、投稿・保存・コメントをすぐ使えます。
+            Googleアカウントで連携すると、投稿・保存・コメントをすぐ使えます。
             ログイン状態は同じブラウザに保存されます。
           </p>
         </div>
@@ -102,39 +102,40 @@
           <p class="eyebrow">Post</p>
           <h2>謚慕ｨｿ縺吶ｋ</h2>
         </div>
-        <p class="notice" id="postNotice">蜈ｱ譛画兜遞ｿ縺ｫ縺ｯ繝｡繝ｼ繝ｫ隱崎ｨｼ貂医∩繧｢繧ｫ繧ｦ繝ｳ繝医′蠢・ｦ√〒縺吶ゅご繧ｹ繝医〒繧ょ・逵溘・繝ｬ繝薙Η繝ｼ縺ｨ蜉蟾･縺ｯ隧ｦ縺帙∪縺吶・/p>
+        <p class="notice" id="postNotice">共有投稿にはGoogleログインが必要です。ログイン後は写真を選んで投稿できます。</p>
 
         <form id="postForm">
           <label>
-            蜀咏悄繧帝∈縺ｶ
+            写真を選ぶ
             <input id="photoInput" type="file" accept="image/*" />
           </label>
 
           <label>
-            繧ｿ繧､繝医Ν
-            <input id="titleInput" type="text" placeholder="萓・ 縺ｵ繧上・繧丞嵯縺ｮ繧ｪ繝繝ｩ繧､繧ｹ" required />
+            タイトル
+            <input id="titleInput" type="text" placeholder="例: ふわふわ卵のオムライス" required />
           </label>
 
           <label class="wide">
-            繧ｳ繝｡繝ｳ繝・            <textarea id="descriptionInput" placeholder="蜻ｳ縲∝ｴ謇縲√∪縺滄｣溘∋縺溘＞繝昴う繝ｳ繝医↑縺ｩ" required></textarea>
+            コメント
+            <textarea id="descriptionInput" placeholder="味、場所、また食べたいポイントなど" required></textarea>
           </label>
 
           <div class="location-toggle wide">
             <label class="switch-row">
               <input id="locationToggle" type="checkbox" />
-              <span>菴咲ｽｮ諠・ｱ繧剃ｻ倥￠繧・/span>
+              <span>位置情報を付ける</span>
             </label>
-            <small>縺雁ｺ励・蜷榊燕縺縺代〒繧０K縺ｧ縺吶ら樟蝨ｨ蝨ｰ繝懊ち繝ｳ繧呈款縺吶→蝨ｰ蝗ｳ繝ｪ繝ｳ繧ｯ繧ゆｻ倥″縺ｾ縺吶・/small>
+            <small>お店の名前だけでもOKです。現在地ボタンを押すと地図リンクも付きます。</small>
           </div>
 
           <div class="location-fields wide" id="locationFields" hidden>
             <label>
-              縺雁ｺ励・蝣ｴ謇縺ｮ蜷榊燕
-              <input id="shopNameInput" type="text" placeholder="萓・ 鬧・燕縺ｮ螳夐｣溷ｱ九＆繧・ />
+              お店・場所の名前
+              <input id="shopNameInput" type="text" placeholder="例: 駅前の定食屋さん" />
             </label>
             <div class="location-actions">
-              <button class="secondary-button" type="button" id="getLocationButton">迴ｾ蝨ｨ蝨ｰ繧貞叙蠕・/button>
-              <span id="locationStatus">菴咲ｽｮ諠・ｱ縺ｯ縺ｾ縺蜿門ｾ励＠縺ｦ縺・∪縺帙ｓ縲・/span>
+              <button class="secondary-button" type="button" id="getLocationButton">現在地を取得</button>
+              <span id="locationStatus">位置情報はまだ取得していません。</span>
             </div>
           </div>
 
@@ -144,18 +145,20 @@
             </div>
             <div class="editor-controls">
               <label>
-                譏弱ｋ縺・                <input id="brightnessInput" type="range" min="70" max="130" value="100" />
+                明るさ
+                <input id="brightnessInput" type="range" min="70" max="130" value="100" />
               </label>
               <label>
-                縺上▲縺阪ｊ
+                くっきり
                 <input id="contrastInput" type="range" min="70" max="140" value="105" />
               </label>
               <label>
-                蠖ｩ蠎ｦ
+                彩度
                 <input id="saturationInput" type="range" min="60" max="150" value="110" />
               </label>
               <label>
-                縺ゅ◆縺溘°縺・                <input id="warmthInput" type="range" min="0" max="40" value="10" />
+                あたたかさ
+                <input id="warmthInput" type="range" min="0" max="40" value="10" />
               </label>
               <label>
                 Text
@@ -171,13 +174,13 @@
                 </select>
               </label>
               <div class="editor-buttons">
-                <button class="secondary-button" type="button" id="rotateButton">蝗櫁ｻ｢</button>
-                <button class="secondary-button" type="button" id="resetImageButton">繝ｪ繧ｻ繝・ヨ</button>
+                <button class="secondary-button" type="button" id="rotateButton">回転</button>
+                <button class="secondary-button" type="button" id="resetImageButton">リセット</button>
               </div>
             </div>
           </div>
 
-          <button class="primary-button" type="submit">謚慕ｨｿ縺吶ｋ</button>
+          <button class="primary-button" type="submit">投稿する</button>
         </form>
       </section>
 
