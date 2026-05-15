@@ -10,44 +10,47 @@
   </head>
   <body>
     <button class="chrome-toggle" type="button" id="chromeToggle" aria-expanded="true">
-      荳翫・逕ｻ髱｢繧帝國縺・    </button>
+      上部を隠す
+    </button>
 
     <header class="app-header" id="appHeader">
       <div>
         <p class="eyebrow">Mogu Log</p>
-        <h1>繧ゅ＄繝ｭ繧ｰ</h1>
+        <h1>もぐログ</h1>
       </div>
       <div class="header-actions">
-        <button class="header-button" type="button" id="focusPostButton">謚慕ｨｿ縺吶ｋ</button>
-        <button class="header-button soft" type="button" id="focusDeleteButton">蜑企勁縺吶ｋ</button>
+        <button class="header-button" type="button" id="focusPostButton">投稿する</button>
+        <button class="header-button soft" type="button" id="focusDeleteButton">投稿を見る</button>
         <label class="sound-switch" title="効果音のオン・オフ">
           <input id="soundToggle" type="checkbox" />
-          <span>蜉ｹ譫憺浹</span>
+          <span>効果音</span>
         </label>
       </div>
     </header>
 
     <main class="shell">
       <aside class="app-nav" aria-label="繝｡繧､繝ｳ繝｡繝九Η繝ｼ">
-        <button class="nav-button is-active" type="button" data-jump="feed" title="謚慕ｨｿ荳隕ｧ">竚・/button>
-        <button class="nav-button" type="button" data-jump="composer" title="謚慕ｨｿ縺吶ｋ">・・/button>
-        <button class="nav-button" type="button" data-jump="search" title="讀懃ｴ｢">竚・/button>
-        <button class="nav-button" type="button" data-jump="account" title="繧｢繧ｫ繧ｦ繝ｳ繝・>莠ｺ</button>
+        <button class="nav-button is-active" type="button" data-jump="feed" title="投稿一覧">□</button>
+        <button class="nav-button" type="button" data-jump="composer" title="投稿する">＋</button>
+        <button class="nav-button" type="button" data-jump="search" title="検索">⌕</button>
+        <button class="nav-button" type="button" data-jump="account" title="アカウント">G</button>
         <button class="nav-button" type="button" data-jump="notifications" title="Notifications">!</button>
         <button class="nav-button" type="button" data-jump="profile" title="Profile">@</button>
-        <button class="nav-button" type="button" data-jump="settings" title="險ｭ螳・>笙ｪ</button>
+        <button class="nav-button" type="button" data-jump="settings" title="設定">♪</button>
       </aside>
 
       <section class="intro">
         <div>
           <p class="eyebrow">Mogu Moment</p>
-          <h2>縺翫＞縺励°縺｣縺溽椪髢薙ｒ縲∝・逵溘▽縺阪〒豌苓ｻｽ縺ｫ谿九◎縺・・/h2>
+          <h2>おいしかった瞬間を、Googleログインで気軽に残そう。</h2>
           <p>
-            繧ｲ繧ｹ繝医〒繧よ兜遞ｿ縺ｮ髢ｲ隕ｧ縲∵､懃ｴ｢縲∝・逵溘・繝ｬ繝薙Η繝ｼ縲√＞縺・・貍泌・繧定ｩｦ縺帙∪縺吶・            繝｡繝ｼ繝ｫ隱崎ｨｼ縺ｧ繝ｭ繧ｰ繧､繝ｳ縺吶ｋ縺ｨ縲∝・蜩｡蜈ｱ譛峨・謚慕ｨｿ繝ｻ蜀咏悄菫晏ｭ倥・繧ゅ＄繧ゅ＄縺御ｽｿ縺医∪縺吶・          </p>
+            メール認証は不要です。Googleアカウントで連携すると、投稿・保存・コメントをすぐ使えます。
+            ログイン状態は同じブラウザに保存されます。
+          </p>
         </div>
         <div class="intro-counter">
           <strong id="postCount">0</strong>
-          <span>莉ｶ縺ｮ謚慕ｨｿ</span>
+          <span>件の投稿</span>
         </div>
         <div class="intro-actions">
           <button class="ranking-button" type="button" id="rankingButton">Ranking</button>
@@ -56,23 +59,41 @@
       </section>
 
       <section class="account-panel google-account-panel" id="accountSection" aria-label="Account">
-        <div class="section-heading">
-          <p class="eyebrow">Account</p>
-          <h2>Googleログイン</h2>
-        </div>
-        <div class="account-status">
-          <div class="current-avatar" id="currentAvatar">G</div>
-          <div>
-            <strong id="accountStatus">ゲスト利用中</strong>
-            <p id="accountHint">Googleアカウントでログインすると、投稿・保存・コメントが使えます。ログイン状態は次回以降も保存されます。</p>
+        <div class="google-connect-card">
+          <div class="google-connect-main">
+            <div class="section-heading">
+              <p class="eyebrow">Google Account</p>
+              <h2>Googleアカウントで連携</h2>
+            </div>
+            <div class="account-status">
+              <div class="current-avatar" id="currentAvatar">G</div>
+              <div>
+                <strong id="accountStatus">ゲスト利用中</strong>
+                <p id="accountHint">Googleでログインすると、投稿・保存・コメントが使えます。ログイン状態は次回以降も保存されます。</p>
+              </div>
+            </div>
+            <div class="auth-form google-auth-actions" id="authForm">
+              <button class="google-login-button" type="button" id="googleSignInButton">
+                <span class="google-mark">G</span>
+                <span>Googleで続ける</span>
+              </button>
+              <button class="secondary-button" type="button" id="signOutButton" hidden>ログアウト</button>
+            </div>
           </div>
-        </div>
-        <div class="auth-form google-auth-actions" id="authForm">
-          <button class="google-login-button" type="button" id="googleSignInButton">
-            <span class="google-mark">G</span>
-            <span>Googleでログイン</span>
-          </button>
-          <button class="secondary-button" type="button" id="signOutButton" hidden>ログアウト</button>
+          <div class="google-benefits" aria-label="Google連携でできること">
+            <div>
+              <strong>すぐ投稿</strong>
+              <span>メール確認なしで、Google認証後すぐに投稿できます。</span>
+            </div>
+            <div>
+              <strong>次回もそのまま</strong>
+              <span>同じブラウザではログイン状態を保存します。</span>
+            </div>
+            <div>
+              <strong>安心して管理</strong>
+              <span>投稿者情報はSupabase Authで管理されます。</span>
+            </div>
+          </div>
         </div>
       </section>
 

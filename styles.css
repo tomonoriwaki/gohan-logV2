@@ -330,6 +330,34 @@ body.chrome-hidden .app-nav {
   align-items: flex-start;
 }
 
+.google-account-panel {
+  overflow: hidden;
+  padding: 0;
+  background:
+    linear-gradient(135deg, rgba(73, 107, 85, 0.08), transparent 42%),
+    var(--surface);
+}
+
+.google-connect-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
+  gap: 0;
+  min-height: 260px;
+}
+
+.google-connect-main {
+  padding: clamp(22px, 4vw, 34px);
+}
+
+.google-connect-main .section-heading h2 {
+  font-size: clamp(28px, 5vw, 46px);
+  line-height: 1.08;
+}
+
+.google-connect-main #accountHint {
+  max-width: 560px;
+}
+
 .google-auth-actions {
   display: flex;
   flex-wrap: wrap;
@@ -342,33 +370,64 @@ body.chrome-hidden .app-nav {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  min-height: 48px;
-  padding: 0 18px;
+  min-height: 54px;
+  padding: 0 22px;
   color: #2b2118;
   background: #fff;
   border: 1px solid rgba(43, 33, 24, 0.16);
   border-radius: 8px;
   font: inherit;
-  font-weight: 800;
+  font-weight: 900;
   box-shadow: 0 8px 18px rgba(60, 43, 28, 0.08);
   cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
 }
 
 .google-login-button:hover {
   transform: translateY(-1px);
   box-shadow: 0 12px 22px rgba(60, 43, 28, 0.12);
+  border-color: rgba(66, 133, 244, 0.42);
 }
 
 .google-mark {
   display: grid;
   place-items: center;
-  width: 26px;
-  height: 26px;
+  width: 28px;
+  height: 28px;
   color: #4285f4;
   background: #fff;
   border: 1px solid rgba(43, 33, 24, 0.14);
   border-radius: 50%;
   font-weight: 900;
+}
+
+.google-benefits {
+  display: grid;
+  align-content: center;
+  gap: 12px;
+  padding: clamp(20px, 4vw, 30px);
+  background: rgba(73, 107, 85, 0.1);
+  border-left: 1px solid rgba(73, 107, 85, 0.16);
+}
+
+.google-benefits div {
+  display: grid;
+  gap: 5px;
+  padding: 14px;
+  background: rgba(255, 252, 246, 0.78);
+  border: 1px solid rgba(73, 107, 85, 0.14);
+  border-radius: 8px;
+}
+
+.google-benefits strong {
+  color: var(--moss);
+  font-size: 15px;
+}
+
+.google-benefits span {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.65;
 }
 
 .section-heading {
@@ -834,6 +893,7 @@ textarea:focus {
   }
 
   .intro,
+  .google-connect-card,
   .auth-form,
   .image-editor,
   .location-fields,
@@ -844,6 +904,11 @@ textarea:focus {
 
   .intro-counter {
     display: none;
+  }
+
+  .google-benefits {
+    border-left: 0;
+    border-top: 1px solid rgba(73, 107, 85, 0.16);
   }
 
   .feed-heading {
