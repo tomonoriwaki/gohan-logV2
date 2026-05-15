@@ -55,39 +55,25 @@
         </div>
       </section>
 
-      <section class="account-panel" id="accountSection" aria-label="繧｢繧ｫ繧ｦ繝ｳ繝・>
+      <section class="account-panel google-account-panel" id="accountSection" aria-label="Account">
         <div class="section-heading">
           <p class="eyebrow">Account</p>
-          <h2>繧｢繧ｫ繧ｦ繝ｳ繝・/h2>
+          <h2>Googleログイン</h2>
         </div>
         <div class="account-status">
           <div class="current-avatar" id="currentAvatar">G</div>
           <div>
-            <strong id="accountStatus">繧ｲ繧ｹ繝亥茜逕ｨ荳ｭ</strong>
-            <p id="accountHint">髢ｲ隕ｧ繝ｻ讀懃ｴ｢繝ｻ逕ｻ蜒冗ｷｨ髮・・繧ｲ繧ｹ繝医〒繧ゆｽｿ縺医∪縺吶ょ・譛画兜遞ｿ縺ｫ縺ｯ繝ｭ繧ｰ繧､繝ｳ縺悟ｿ・ｦ√〒縺吶・/p>
+            <strong id="accountStatus">ゲスト利用中</strong>
+            <p id="accountHint">Googleアカウントでログインすると、投稿・保存・コメントが使えます。ログイン状態は次回以降も保存されます。</p>
           </div>
         </div>
-        <form class="auth-form" id="authForm">
-          <label>
-            陦ｨ遉ｺ蜷・            <input id="displayNameInput" type="text" placeholder="萓・ mogu" />
-          </label>
-          <label>
-            繝｡繝ｼ繝ｫ繧｢繝峨Ξ繧ｹ
-            <input id="emailInput" type="email" placeholder="you@example.com" autocomplete="email" required />
-          </label>
-          <label>
-            繝代せ繝ｯ繝ｼ繝・            <input id="passwordInput" type="password" minlength="6" autocomplete="current-password" required />
-          </label>
-          <label class="switch-row wide">
-            <input id="termsInput" type="checkbox" />
-            <span>蛻ｩ逕ｨ隕冗ｴ・→繝励Λ繧､繝舌す繝ｼ繝昴Μ繧ｷ繝ｼ縺ｫ蜷梧э縺励∪縺・/span>
-          </label>
-          <div class="auth-actions wide">
-            <button class="primary-button compact" type="button" id="signUpButton">逋ｻ骭ｲ繝｡繝ｼ繝ｫ繧帝√ｋ</button>
-            <button class="secondary-button" type="submit" id="signInButton">繝ｭ繧ｰ繧､繝ｳ</button>
-            <button class="secondary-button" type="button" id="signOutButton" hidden>繝ｭ繧ｰ繧｢繧ｦ繝・/button>
-          </div>
-        </form>
+        <div class="auth-form google-auth-actions" id="authForm">
+          <button class="google-login-button" type="button" id="googleSignInButton">
+            <span class="google-mark">G</span>
+            <span>Googleでログイン</span>
+          </button>
+          <button class="secondary-button" type="button" id="signOutButton" hidden>ログアウト</button>
+        </div>
       </section>
 
       <section class="composer" id="composer" aria-label="縺斐・繧薙ｒ謚慕ｨｿ縺吶ｋ">

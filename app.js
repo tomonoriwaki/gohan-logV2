@@ -1,4 +1,4 @@
-const SOUND_KEY = "mogu-log-sound-enabled-v2";
+﻿const SOUND_KEY = "mogu-log-sound-enabled-v2";
 const CHROME_KEY = "mogu-log-chrome-hidden-v2";
 const GUEST_LIKES_KEY = "mogu-log-guest-likes-v1";
 const GUEST_BOOSTS_KEY = "mogu-log-guest-boosts-v1";
@@ -29,7 +29,7 @@ const demoPosts = [
     created_at: new Date().toISOString(),
     likes_count: 0,
     boosts_count: 0,
-    shop_name: "いつもの食卓",
+    shop_name: "いつもの食堂",
   },
   {
     id: "demo-2",
@@ -66,12 +66,7 @@ const elements = {
   accountHint: document.querySelector("#accountHint"),
   currentAvatar: document.querySelector("#currentAvatar"),
   authForm: document.querySelector("#authForm"),
-  displayNameInput: document.querySelector("#displayNameInput"),
-  emailInput: document.querySelector("#emailInput"),
-  passwordInput: document.querySelector("#passwordInput"),
-  termsInput: document.querySelector("#termsInput"),
-  signUpButton: document.querySelector("#signUpButton"),
-  signInButton: document.querySelector("#signInButton"),
+  googleSignInButton: document.querySelector("#googleSignInButton"),
   signOutButton: document.querySelector("#signOutButton"),
   postNotice: document.querySelector("#postNotice"),
   postForm: document.querySelector("#postForm"),
@@ -117,7 +112,7 @@ function isLoggedIn() {
 }
 
 function isEmailVerified() {
-  return Boolean(currentUser?.email_confirmed_at || currentUser?.confirmed_at);
+  return Boolean(currentUser?.email_confirmed_at || currentUser?.confirmed_at || currentUser?.app_metadata?.provider === "google");
 }
 
 function isAdmin() {
@@ -160,11 +155,17 @@ async function initAuth() {
   } = await supabaseClient.auth.getSession();
   currentUser = session?.user || null;
   await loadProfile();
+  if (currentUser && !currentProfile) {
+    await upsertProfile(currentUser.user_metadata?.full_name || "");
+  }
   updateAccountView();
 
   supabaseClient.auth.onAuthStateChange(async (_event, sessionValue) => {
     currentUser = sessionValue?.user || null;
     await loadProfile();
+    if (currentUser && !currentProfile) {
+      await upsertProfile(currentUser.user_metadata?.full_name || "");
+    }
     updateAccountView();
     await loadPosts();
   });
@@ -186,7 +187,7 @@ async function upsertProfile(displayName = "") {
     return;
   }
 
-  const fallbackName = currentUser.email?.split("@")[0] || "mogu";
+  const fallbackName = currentUser.user_metadata?.full_name || currentUser.email?.split("@")[0] || "mogu";
   await supabaseClient.from("profiles").upsert(
     {
       id: currentUser.id,
@@ -201,36 +202,30 @@ async function upsertProfile(displayName = "") {
 function updateAccountView() {
   const configured = hasSupabaseConfig;
   elements.signOutButton.hidden = !currentUser;
-  elements.signInButton.hidden = Boolean(currentUser);
-  elements.signUpButton.hidden = Boolean(currentUser);
+  elements.googleSignInButton.hidden = Boolean(currentUser);
   elements.authForm.classList.toggle("is-logged-in", Boolean(currentUser));
 
   if (!configured) {
     elements.accountStatus.textContent = "ゲスト利用中";
-    elements.accountHint.textContent =
-      "SupabaseのURLとanon keyを supabase-config.js に入れると、本物のメール認証と共有投稿が有効になります。";
+    elements.accountHint.textContent = "supabase-config.js にSupabaseのURLとanon keyを入れると、Googleログインが使えます。";
     elements.currentAvatar.textContent = "G";
-    elements.postNotice.textContent = "現在はゲストモードです。閲覧・検索・画像プレビュー・いいね演出を試せます。";
+    elements.postNotice.textContent = "現在はゲストモードです。共有投稿にはGoogleログインが必要です。";
     return;
   }
 
   if (!currentUser) {
     elements.accountStatus.textContent = "ゲスト利用中";
-    elements.accountHint.textContent = "ログインすると、全員共有の投稿・写真保存・もぐもぐが使えます。";
+    elements.accountHint.textContent = "Googleでログインすると、投稿・保存・コメントが使えます。次回からもログイン状態が保存されます。";
     elements.currentAvatar.textContent = "G";
-    elements.postNotice.textContent = "共有投稿にはメール認証済みアカウントが必要です。";
+    elements.postNotice.textContent = "共有投稿にはGoogleログインが必要です。";
     return;
   }
 
-  const name = currentProfile?.display_name || currentUser.email?.split("@")[0] || "mogu";
-  elements.accountStatus.textContent = `${name} / ${isAdmin() ? "管理者" : "ユーザー"}`;
-  elements.accountHint.textContent = isEmailVerified()
-    ? `${currentUser.email} でログイン中です。`
-    : "確認メールを開くと投稿できるようになります。";
+  const name = currentProfile?.display_name || currentUser.user_metadata?.full_name || currentUser.email?.split("@")[0] || "mogu";
+  elements.accountStatus.textContent = `${name} / ${isAdmin() ? "管理者" : "Googleログイン中"}`;
+  elements.accountHint.textContent = `${currentUser.email || "Googleアカウント"} でログイン中です。次回もこのブラウザではログイン状態が続きます。`;
   elements.currentAvatar.textContent = name.slice(0, 2).toUpperCase();
-  elements.postNotice.textContent = isEmailVerified()
-    ? "写真を選んで、共有タイムラインへ投稿できます。"
-    : "メール認証が完了すると投稿できます。";
+  elements.postNotice.textContent = "写真を選んで、共有タイムラインへ投稿できます。";
 }
 
 function mapSupabasePost(post, likes = [], boosts = []) {
@@ -564,13 +559,13 @@ async function createPost(event) {
   }
 
   if (!currentUser) {
-    alert("投稿するにはログインしてください。");
+    alert("投稿するにはGoogleログインしてください。");
     elements.accountSection.scrollIntoView({ behavior: "smooth", block: "start" });
     return;
   }
 
   if (!isEmailVerified()) {
-    alert("投稿するにはメール認証を完了してください。");
+    alert("投稿するにはGoogleログインしてください。");
     return;
   }
 
@@ -609,64 +604,26 @@ async function createPost(event) {
   }
 }
 
-async function signUp() {
+async function signInWithGoogle() {
   if (!supabaseClient) {
     alert("supabase-config.js にSupabaseのURLとanon keyを設定してください。");
     return;
   }
 
-  if (!elements.termsInput.checked) {
-    alert("登録には利用規約とプライバシーポリシーへの同意が必要です。");
-    return;
-  }
-
-  const { data, error } = await supabaseClient.auth.signUp({
-    email: elements.emailInput.value.trim(),
-    password: elements.passwordInput.value,
+  const { error } = await supabaseClient.auth.signInWithOAuth({
+    provider: "google",
     options: {
-      data: {
-        display_name: elements.displayNameInput.value.trim(),
+      redirectTo: location.origin + location.pathname,
+      queryParams: {
+        access_type: "offline",
+        prompt: "select_account",
       },
     },
   });
 
   if (error) {
     alert(error.message);
-    return;
   }
-
-  currentUser = data.session?.user || null;
-
-  if (currentUser) {
-    await upsertProfile(elements.displayNameInput.value.trim());
-  }
-
-  updateAccountView();
-  alert("確認メールを送信しました。メール内のリンクを開いて認証してください。");
-}
-
-async function signIn(event) {
-  event.preventDefault();
-
-  if (!supabaseClient) {
-    alert("supabase-config.js にSupabaseのURLとanon keyを設定してください。");
-    return;
-  }
-
-  const { data, error } = await supabaseClient.auth.signInWithPassword({
-    email: elements.emailInput.value.trim(),
-    password: elements.passwordInput.value,
-  });
-
-  if (error) {
-    alert(error.message);
-    return;
-  }
-
-  currentUser = data.user;
-  await upsertProfile(elements.displayNameInput.value.trim());
-  updateAccountView();
-  await loadPosts();
 }
 
 async function signOut() {
@@ -773,8 +730,7 @@ function jumpTo(targetId) {
   playSound("tap");
 }
 
-elements.authForm.addEventListener("submit", signIn);
-elements.signUpButton.addEventListener("click", signUp);
+elements.googleSignInButton.addEventListener("click", signInWithGoogle);
 elements.signOutButton.addEventListener("click", signOut);
 elements.postForm.addEventListener("submit", createPost);
 
@@ -868,7 +824,7 @@ async function upsertProfile(displayName = "") {
     return;
   }
 
-  const fallbackName = currentUser.email?.split("@")[0] || "mogu";
+  const fallbackName = currentUser.user_metadata?.full_name || currentUser.email?.split("@")[0] || "mogu";
   const extra = getExtraProfile();
   await supabaseClient.from("profiles").upsert(
     {
@@ -1029,7 +985,7 @@ function createPostCard(post, compact = false) {
   description.textContent = post.description;
   author.textContent = `@${post.author_handle || post.author_name || "mogu"}`;
   time.textContent = formatTime(post.created_at);
-  heart.textContent = post.liked_by_me ? "笙･" : "笙｡";
+  heart.textContent = post.liked_by_me ? "隨呻ｽ･" : "隨呻ｽ｡";
   likeCount.textContent = post.likes_count || 0;
   likeButton.classList.toggle("is-liked", Boolean(post.liked_by_me));
   boostCount.textContent = post.boosts_count || 0;
@@ -1187,6 +1143,6 @@ initAuth().then(loadPosts);
 
 if ("serviceWorker" in navigator && location.protocol !== "file:") {
   navigator.serviceWorker.register("service-worker.js").catch((error) => {
-    console.warn("アプリ化用のService Worker登録に失敗しました。", error);
+    console.warn("Service Workerの登録に失敗しました。", error);
   });
 }
