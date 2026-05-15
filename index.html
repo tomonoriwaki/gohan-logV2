@@ -1,205 +1,287 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>もぐログ</title>
+    <title>繧ゅ＄繝ｭ繧ｰ</title>
     <meta name="theme-color" content="#496b55" />
     <link rel="stylesheet" href="styles.css?v=20260516-cloudflare" />
     <link rel="manifest" href="manifest.webmanifest?v=20260516-cloudflare" />
   </head>
   <body>
     <button class="chrome-toggle" type="button" id="chromeToggle" aria-expanded="true">
-      上の画面を隠す
-    </button>
+      荳翫・逕ｻ髱｢繧帝國縺・    </button>
 
     <header class="app-header" id="appHeader">
       <div>
         <p class="eyebrow">Mogu Log</p>
-        <h1>もぐログ</h1>
+        <h1>繧ゅ＄繝ｭ繧ｰ</h1>
       </div>
       <div class="header-actions">
-        <button class="header-button" type="button" id="focusPostButton">投稿する</button>
-        <button class="header-button soft" type="button" id="focusDeleteButton">削除する</button>
+        <button class="header-button" type="button" id="focusPostButton">謚慕ｨｿ縺吶ｋ</button>
+        <button class="header-button soft" type="button" id="focusDeleteButton">蜑企勁縺吶ｋ</button>
         <label class="sound-switch" title="効果音のオン・オフ">
           <input id="soundToggle" type="checkbox" />
-          <span>効果音</span>
+          <span>蜉ｹ譫憺浹</span>
         </label>
       </div>
     </header>
 
     <main class="shell">
-      <aside class="app-nav" aria-label="メインメニュー">
-        <button class="nav-button is-active" type="button" data-jump="feed" title="投稿一覧">⌂</button>
-        <button class="nav-button" type="button" data-jump="composer" title="投稿する">＋</button>
-        <button class="nav-button" type="button" data-jump="search" title="検索">⌕</button>
-        <button class="nav-button" type="button" data-jump="account" title="アカウント">人</button>
-        <button class="nav-button" type="button" data-jump="settings" title="設定">♪</button>
+      <aside class="app-nav" aria-label="繝｡繧､繝ｳ繝｡繝九Η繝ｼ">
+        <button class="nav-button is-active" type="button" data-jump="feed" title="謚慕ｨｿ荳隕ｧ">竚・/button>
+        <button class="nav-button" type="button" data-jump="composer" title="謚慕ｨｿ縺吶ｋ">・・/button>
+        <button class="nav-button" type="button" data-jump="search" title="讀懃ｴ｢">竚・/button>
+        <button class="nav-button" type="button" data-jump="account" title="繧｢繧ｫ繧ｦ繝ｳ繝・>莠ｺ</button>
+        <button class="nav-button" type="button" data-jump="notifications" title="Notifications">!</button>
+        <button class="nav-button" type="button" data-jump="profile" title="Profile">@</button>
+        <button class="nav-button" type="button" data-jump="settings" title="險ｭ螳・>笙ｪ</button>
       </aside>
 
       <section class="intro">
         <div>
           <p class="eyebrow">Mogu Moment</p>
-          <h2>おいしかった瞬間を、写真つきで気軽に残そう。</h2>
+          <h2>縺翫＞縺励°縺｣縺溽椪髢薙ｒ縲∝・逵溘▽縺阪〒豌苓ｻｽ縺ｫ谿九◎縺・・/h2>
           <p>
-            ゲストでも投稿の閲覧、検索、写真プレビュー、いいね演出を試せます。
-            メール認証でログインすると、全員共有の投稿・写真保存・もぐもぐが使えます。
-          </p>
+            繧ｲ繧ｹ繝医〒繧よ兜遞ｿ縺ｮ髢ｲ隕ｧ縲∵､懃ｴ｢縲∝・逵溘・繝ｬ繝薙Η繝ｼ縲√＞縺・・貍泌・繧定ｩｦ縺帙∪縺吶・            繝｡繝ｼ繝ｫ隱崎ｨｼ縺ｧ繝ｭ繧ｰ繧､繝ｳ縺吶ｋ縺ｨ縲∝・蜩｡蜈ｱ譛峨・謚慕ｨｿ繝ｻ蜀咏悄菫晏ｭ倥・繧ゅ＄繧ゅ＄縺御ｽｿ縺医∪縺吶・          </p>
         </div>
         <div class="intro-counter">
           <strong id="postCount">0</strong>
-          <span>件の投稿</span>
+          <span>莉ｶ縺ｮ謚慕ｨｿ</span>
+        </div>
+        <div class="intro-actions">
+          <button class="ranking-button" type="button" id="rankingButton">Ranking</button>
+          <button class="ranking-button soft" type="button" id="timelineButton">Timeline</button>
         </div>
       </section>
 
-      <section class="account-panel" id="accountSection" aria-label="アカウント">
+      <section class="account-panel" id="accountSection" aria-label="繧｢繧ｫ繧ｦ繝ｳ繝・>
         <div class="section-heading">
           <p class="eyebrow">Account</p>
-          <h2>アカウント</h2>
+          <h2>繧｢繧ｫ繧ｦ繝ｳ繝・/h2>
         </div>
         <div class="account-status">
           <div class="current-avatar" id="currentAvatar">G</div>
           <div>
-            <strong id="accountStatus">ゲスト利用中</strong>
-            <p id="accountHint">閲覧・検索・画像編集はゲストでも使えます。共有投稿にはログインが必要です。</p>
+            <strong id="accountStatus">繧ｲ繧ｹ繝亥茜逕ｨ荳ｭ</strong>
+            <p id="accountHint">髢ｲ隕ｧ繝ｻ讀懃ｴ｢繝ｻ逕ｻ蜒冗ｷｨ髮・・繧ｲ繧ｹ繝医〒繧ゆｽｿ縺医∪縺吶ょ・譛画兜遞ｿ縺ｫ縺ｯ繝ｭ繧ｰ繧､繝ｳ縺悟ｿ・ｦ√〒縺吶・/p>
           </div>
         </div>
         <form class="auth-form" id="authForm">
           <label>
-            表示名
-            <input id="displayNameInput" type="text" placeholder="例: mogu" />
+            陦ｨ遉ｺ蜷・            <input id="displayNameInput" type="text" placeholder="萓・ mogu" />
           </label>
           <label>
-            メールアドレス
+            繝｡繝ｼ繝ｫ繧｢繝峨Ξ繧ｹ
             <input id="emailInput" type="email" placeholder="you@example.com" autocomplete="email" required />
           </label>
           <label>
-            パスワード
-            <input id="passwordInput" type="password" minlength="6" autocomplete="current-password" required />
+            繝代せ繝ｯ繝ｼ繝・            <input id="passwordInput" type="password" minlength="6" autocomplete="current-password" required />
           </label>
           <label class="switch-row wide">
             <input id="termsInput" type="checkbox" />
-            <span>利用規約とプライバシーポリシーに同意します</span>
+            <span>蛻ｩ逕ｨ隕冗ｴ・→繝励Λ繧､繝舌す繝ｼ繝昴Μ繧ｷ繝ｼ縺ｫ蜷梧э縺励∪縺・/span>
           </label>
           <div class="auth-actions wide">
-            <button class="primary-button compact" type="button" id="signUpButton">登録メールを送る</button>
-            <button class="secondary-button" type="submit" id="signInButton">ログイン</button>
-            <button class="secondary-button" type="button" id="signOutButton" hidden>ログアウト</button>
+            <button class="primary-button compact" type="button" id="signUpButton">逋ｻ骭ｲ繝｡繝ｼ繝ｫ繧帝√ｋ</button>
+            <button class="secondary-button" type="submit" id="signInButton">繝ｭ繧ｰ繧､繝ｳ</button>
+            <button class="secondary-button" type="button" id="signOutButton" hidden>繝ｭ繧ｰ繧｢繧ｦ繝・/button>
           </div>
         </form>
       </section>
 
-      <section class="composer" id="composer" aria-label="ごはんを投稿する">
+      <section class="composer" id="composer" aria-label="縺斐・繧薙ｒ謚慕ｨｿ縺吶ｋ">
         <div class="section-heading">
           <p class="eyebrow">Post</p>
-          <h2>投稿する</h2>
+          <h2>謚慕ｨｿ縺吶ｋ</h2>
         </div>
-        <p class="notice" id="postNotice">共有投稿にはメール認証済みアカウントが必要です。ゲストでも写真プレビューと加工は試せます。</p>
+        <p class="notice" id="postNotice">蜈ｱ譛画兜遞ｿ縺ｫ縺ｯ繝｡繝ｼ繝ｫ隱崎ｨｼ貂医∩繧｢繧ｫ繧ｦ繝ｳ繝医′蠢・ｦ√〒縺吶ゅご繧ｹ繝医〒繧ょ・逵溘・繝ｬ繝薙Η繝ｼ縺ｨ蜉蟾･縺ｯ隧ｦ縺帙∪縺吶・/p>
 
         <form id="postForm">
           <label>
-            写真を選ぶ
+            蜀咏悄繧帝∈縺ｶ
             <input id="photoInput" type="file" accept="image/*" />
           </label>
 
           <label>
-            タイトル
-            <input id="titleInput" type="text" placeholder="例: ふわふわ卵のオムライス" required />
+            繧ｿ繧､繝医Ν
+            <input id="titleInput" type="text" placeholder="萓・ 縺ｵ繧上・繧丞嵯縺ｮ繧ｪ繝繝ｩ繧､繧ｹ" required />
           </label>
 
           <label class="wide">
-            コメント
-            <textarea id="descriptionInput" placeholder="味、場所、また食べたいポイントなど" required></textarea>
+            繧ｳ繝｡繝ｳ繝・            <textarea id="descriptionInput" placeholder="蜻ｳ縲∝ｴ謇縲√∪縺滄｣溘∋縺溘＞繝昴う繝ｳ繝医↑縺ｩ" required></textarea>
           </label>
 
           <div class="location-toggle wide">
             <label class="switch-row">
               <input id="locationToggle" type="checkbox" />
-              <span>位置情報を付ける</span>
+              <span>菴咲ｽｮ諠・ｱ繧剃ｻ倥￠繧・/span>
             </label>
-            <small>お店の名前だけでもOKです。現在地ボタンを押すと地図リンクも付きます。</small>
+            <small>縺雁ｺ励・蜷榊燕縺縺代〒繧０K縺ｧ縺吶ら樟蝨ｨ蝨ｰ繝懊ち繝ｳ繧呈款縺吶→蝨ｰ蝗ｳ繝ｪ繝ｳ繧ｯ繧ゆｻ倥″縺ｾ縺吶・/small>
           </div>
 
           <div class="location-fields wide" id="locationFields" hidden>
             <label>
-              お店・場所の名前
-              <input id="shopNameInput" type="text" placeholder="例: 駅前の定食屋さん" />
+              縺雁ｺ励・蝣ｴ謇縺ｮ蜷榊燕
+              <input id="shopNameInput" type="text" placeholder="萓・ 鬧・燕縺ｮ螳夐｣溷ｱ九＆繧・ />
             </label>
             <div class="location-actions">
-              <button class="secondary-button" type="button" id="getLocationButton">現在地を取得</button>
-              <span id="locationStatus">位置情報はまだ取得していません。</span>
+              <button class="secondary-button" type="button" id="getLocationButton">迴ｾ蝨ｨ蝨ｰ繧貞叙蠕・/button>
+              <span id="locationStatus">菴咲ｽｮ諠・ｱ縺ｯ縺ｾ縺蜿門ｾ励＠縺ｦ縺・∪縺帙ｓ縲・/span>
             </div>
           </div>
 
           <div class="image-editor wide" id="imageEditor" hidden>
             <div class="preview-frame">
-              <canvas id="previewCanvas" width="900" height="675" aria-label="投稿画像のプレビュー"></canvas>
+              <canvas id="previewCanvas" width="900" height="675" aria-label="謚慕ｨｿ逕ｻ蜒上・繝励Ξ繝薙Η繝ｼ"></canvas>
             </div>
             <div class="editor-controls">
               <label>
-                明るさ
-                <input id="brightnessInput" type="range" min="70" max="130" value="100" />
+                譏弱ｋ縺・                <input id="brightnessInput" type="range" min="70" max="130" value="100" />
               </label>
               <label>
-                くっきり
+                縺上▲縺阪ｊ
                 <input id="contrastInput" type="range" min="70" max="140" value="105" />
               </label>
               <label>
-                彩度
+                蠖ｩ蠎ｦ
                 <input id="saturationInput" type="range" min="60" max="150" value="110" />
               </label>
               <label>
-                あたたかさ
-                <input id="warmthInput" type="range" min="0" max="40" value="10" />
+                縺ゅ◆縺溘°縺・                <input id="warmthInput" type="range" min="0" max="40" value="10" />
+              </label>
+              <label>
+                Text
+                <input id="overlayTextInput" type="text" placeholder="Mogu!" />
+              </label>
+              <label>
+                Stamp
+                <select id="stampSelect">
+                  <option value="">None</option>
+                  <option value="*">*</option>
+                  <option value="heart">heart</option>
+                  <option value="hot">hot</option>
+                </select>
               </label>
               <div class="editor-buttons">
-                <button class="secondary-button" type="button" id="rotateButton">回転</button>
-                <button class="secondary-button" type="button" id="resetImageButton">リセット</button>
+                <button class="secondary-button" type="button" id="rotateButton">蝗櫁ｻ｢</button>
+                <button class="secondary-button" type="button" id="resetImageButton">繝ｪ繧ｻ繝・ヨ</button>
               </div>
             </div>
           </div>
 
-          <button class="primary-button" type="submit">投稿する</button>
+          <button class="primary-button" type="submit">謚慕ｨｿ縺吶ｋ</button>
         </form>
       </section>
 
-      <section class="feed-section" id="feedSection" aria-label="投稿一覧">
+      <section class="feed-section" id="feedSection" aria-label="謚慕ｨｿ荳隕ｧ">
         <div class="section-heading feed-heading">
           <div>
-            <p class="eyebrow">Timeline</p>
-            <h2>投稿一覧</h2>
+            <p class="eyebrow" id="feedModeLabel">Timeline</p>
+            <h2 id="feedTitle">謚慕ｨｿ荳隕ｧ</h2>
           </div>
-          <label class="search-box" id="searchBox">
-            <span>検索</span>
-            <input id="searchInput" type="search" placeholder="料理名・コメント・場所で探す" />
-          </label>
+          <div class="search-tools" id="searchBox">
+            <label class="search-box">
+              <span>讀懃ｴ｢</span>
+              <input id="searchInput" type="search" placeholder="料理名・コメント・場所で探す" />
+            </label>
+            <button class="category-toggle" type="button" id="categoryToggle" aria-expanded="false" aria-controls="categoryMenu">#</button>
+            <div class="category-menu" id="categoryMenu" hidden>
+              <button type="button" data-category="繝ｩ繝ｼ繝｡繝ｳ">繝ｩ繝ｼ繝｡繝ｳ</button>
+              <button type="button" data-category="蟇ｿ蜿ｸ">蟇ｿ蜿ｸ</button>
+              <button type="button" data-category="繧ｫ繝輔ぉ">繧ｫ繝輔ぉ</button>
+              <button type="button" data-category="螳夐｣">螳夐｣</button>
+            </div>
+          </div>
         </div>
 
         <div class="feed" id="feed"></div>
-        <p class="empty-state" id="emptyState" hidden>まだ表示できる投稿がありません。</p>
+        <p class="empty-state" id="emptyState" hidden>縺ｾ縺陦ｨ遉ｺ縺ｧ縺阪ｋ謚慕ｨｿ縺後≠繧翫∪縺帙ｓ縲・/p>
       </section>
 
-      <section class="settings" id="settingsSection" aria-label="設定">
+      <section class="notifications" id="notificationsSection" aria-label="Notifications">
+        <div class="section-heading">
+          <p class="eyebrow">Notifications</p>
+          <h2>通知</h2>
+        </div>
+        <div class="notice-crown">
+          <div>
+            <span>Progress</span>
+            <strong id="noticeCrownText">0 / 10</strong>
+          </div>
+          <div class="gauge-track"><span id="noticeCrownGauge"></span></div>
+          <p id="noticeCrownHint">いいねやリツイートが増えるとここに反映されます。</p>
+        </div>
+        <div class="notice-list" id="noticeList"></div>
+      </section>
+
+      <section class="profile" id="profileSection" aria-label="Profile">
+        <div class="section-heading">
+          <p class="eyebrow">My Profile</p>
+          <h2>myプロフィール</h2>
+        </div>
+        <div class="profile-card">
+          <div class="profile-avatar" id="profileAvatar">M</div>
+          <div>
+            <strong id="profileNamePreview">mogu</strong>
+            <span class="royal-badge" id="profileRoyalBadge">王冠まであと少し</span>
+            <p id="profileBioPreview">おいしかったものを気軽に残しています。</p>
+            <div class="profile-tags">
+              <span id="profileAreaTag">エリア未設定</span>
+              <span id="profileFoodTag">ジャンル未設定</span>
+            </div>
+            <span id="profileStats">投稿 0件 / いいね 0件</span>
+          </div>
+        </div>
+        <div class="profile-dashboard">
+          <form class="profile-form" id="profileForm">
+            <div class="section-heading compact-heading">
+              <p class="eyebrow">About Me</p>
+              <h3>プロフィール編集</h3>
+            </div>
+            <label>表示名<input id="profileNameInput" type="text" placeholder="mogu" /></label>
+            <label>ID<input id="profileHandleInput" type="text" placeholder="mogu" /></label>
+            <label class="wide">自己紹介<textarea id="profileBioInput" placeholder="好きなごはん、投稿スタイルなど"></textarea></label>
+            <label>よく行くエリア<input id="profileAreaInput" type="text" placeholder="渋谷・原宿" /></label>
+            <label>好きなジャンル<input id="profileFoodInput" type="text" placeholder="ラーメン" /></label>
+            <button class="primary-button" type="submit">保存</button>
+          </form>
+          <div class="profile-column">
+            <div class="profile-panel">
+              <div class="section-heading compact-heading"><p class="eyebrow">Saved</p><h3>保存した投稿</h3></div>
+              <div class="mini-feed" id="savedPosts"></div>
+              <p class="empty-state" id="savedPostsEmpty" hidden>まだ保存した投稿がありません。</p>
+            </div>
+            <div class="profile-panel">
+              <div class="section-heading compact-heading"><p class="eyebrow">My Posts</p><h3>自分の投稿</h3></div>
+              <div class="mini-feed" id="myPosts"></div>
+              <p class="empty-state" id="myPostsEmpty" hidden>まだ自分の投稿がありません。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="settings" id="settingsSection" aria-label="Settings">
         <div class="section-heading">
           <p class="eyebrow">Settings</p>
-          <h2>設定</h2>
+          <h2>險ｭ螳・/h2>
         </div>
         <div class="settings-grid">
           <label class="setting-card">
             <input id="soundTogglePanel" type="checkbox" />
             <span>
-              <strong>効果音</strong>
-              <small>いいね、もぐもぐ、投稿のときに小さな音を鳴らします。</small>
+              <strong>蜉ｹ譫憺浹</strong>
+              <small>縺・＞縺ｭ縲√ｂ縺舌ｂ縺舌∵兜遞ｿ縺ｮ縺ｨ縺阪↓蟆上＆縺ｪ髻ｳ繧帝ｳｴ繧峨＠縺ｾ縺吶・/small>
             </span>
           </label>
           <button class="setting-card button-card" type="button" id="chromeTogglePanel">
-            <strong>上の画面を隠す/表示</strong>
-            <small>「もぐログ」「投稿する」「削除する」のバーを切り替えます。</small>
+            <strong>荳翫・逕ｻ髱｢繧帝國縺・陦ｨ遉ｺ</strong>
+            <small>縲後ｂ縺舌Ο繧ｰ縲阪梧兜遞ｿ縺吶ｋ縲阪悟炎髯､縺吶ｋ縲阪・繝舌・繧貞・繧頑崛縺医∪縺吶・/small>
           </button>
         </div>
         <div class="legal-links">
-          <a href="terms.html">利用規約</a>
-          <a href="privacy.html">プライバシーポリシー</a>
+          <a href="terms.html">蛻ｩ逕ｨ隕冗ｴ・/a>
+          <a href="privacy.html">繝励Λ繧､繝舌す繝ｼ繝昴Μ繧ｷ繝ｼ</a>
         </div>
       </section>
     </main>
@@ -212,23 +294,31 @@
             <span class="author">mogu</span>
             <span class="time"></span>
           </div>
+          <span class="post-royal-badge" hidden>Royal user</span>
           <h3></h3>
           <p></p>
           <div class="post-location" hidden>
             <strong class="shop-name"></strong>
-            <a class="map-link" href="#" target="_blank" rel="noreferrer">地図を見る</a>
+            <a class="map-link" href="#" target="_blank" rel="noreferrer">蝨ｰ蝗ｳ繧定ｦ九ｋ</a>
           </div>
+          <div class="comment-list"></div>
+          <form class="comment-form">
+            <input class="comment-input" type="text" placeholder="コメントを書く" aria-label="コメントを書く" />
+            <button class="comment-submit" type="submit">送信</button>
+          </form>
           <div class="post-actions">
-            <button class="like-button" type="button" aria-label="いいねする">
-              <span class="heart">♡</span>
+            <button class="like-button" type="button" aria-label="縺・＞縺ｭ縺吶ｋ">
+              <span class="heart">笙｡</span>
               <span class="like-count">0</span>
             </button>
-            <button class="boost-button" type="button" aria-label="もぐもぐする">
-              <span>もぐ</span>
+            <button class="boost-button" type="button" aria-label="繧ゅ＄繧ゅ＄縺吶ｋ">
+              <span>繧ゅ＄</span>
               <span class="boost-count">0</span>
             </button>
-            <button class="share-button" type="button">共有</button>
-            <button class="delete-button" type="button">削除</button>
+            <button class="share-button" type="button">蜈ｱ譛・/button>
+            <button class="save-button" type="button">保存</button>
+            <button class="report-button" type="button">通報</button>
+            <button class="delete-button" type="button">蜑企勁</button>
           </div>
         </div>
       </article>
