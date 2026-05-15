@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>繧ゅ＄繝ｭ繧ｰ</title>
+    <title>もぐログ</title>
     <meta name="theme-color" content="#496b55" />
-    <link rel="stylesheet" href="styles.css?v=20260516-cloudflare" />
-    <link rel="manifest" href="manifest.webmanifest?v=20260516-cloudflare" />
+    <link rel="stylesheet" href="styles.css?v=20260516-google-only-3" />
+    <link rel="manifest" href="manifest.webmanifest?v=20260516-google-only-3" />
   </head>
   <body>
     <button class="chrome-toggle" type="button" id="chromeToggle" aria-expanded="true">
@@ -29,7 +29,7 @@
     </header>
 
     <main class="shell">
-      <aside class="app-nav" aria-label="繝｡繧､繝ｳ繝｡繝九Η繝ｼ">
+      <aside class="app-nav" aria-label="メインメニュー">
         <button class="nav-button is-active" type="button" data-jump="feed" title="投稿一覧">□</button>
         <button class="nav-button" type="button" data-jump="composer" title="投稿する">＋</button>
         <button class="nav-button" type="button" data-jump="search" title="検索">⌕</button>
@@ -97,10 +97,10 @@
         </div>
       </section>
 
-      <section class="composer" id="composer" aria-label="縺斐・繧薙ｒ謚慕ｨｿ縺吶ｋ">
+      <section class="composer" id="composer" aria-label="ごはんを投稿する">
         <div class="section-heading">
           <p class="eyebrow">Post</p>
-          <h2>謚慕ｨｿ縺吶ｋ</h2>
+          <h2>投稿する</h2>
         </div>
         <p class="notice" id="postNotice">共有投稿にはGoogleログインが必要です。ログイン後は写真を選んで投稿できます。</p>
 
@@ -141,7 +141,7 @@
 
           <div class="image-editor wide" id="imageEditor" hidden>
             <div class="preview-frame">
-              <canvas id="previewCanvas" width="900" height="675" aria-label="謚慕ｨｿ逕ｻ蜒上・繝励Ξ繝薙Η繝ｼ"></canvas>
+              <canvas id="previewCanvas" width="900" height="675" aria-label="投稿画像のプレビュー"></canvas>
             </div>
             <div class="editor-controls">
               <label>
@@ -184,29 +184,29 @@
         </form>
       </section>
 
-      <section class="feed-section" id="feedSection" aria-label="謚慕ｨｿ荳隕ｧ">
+      <section class="feed-section" id="feedSection" aria-label="投稿一覧">
         <div class="section-heading feed-heading">
           <div>
             <p class="eyebrow" id="feedModeLabel">Timeline</p>
-            <h2 id="feedTitle">謚慕ｨｿ荳隕ｧ</h2>
+            <h2 id="feedTitle">投稿一覧</h2>
           </div>
           <div class="search-tools" id="searchBox">
             <label class="search-box">
-              <span>讀懃ｴ｢</span>
+              <span>検索</span>
               <input id="searchInput" type="search" placeholder="料理名・コメント・場所で探す" />
             </label>
             <button class="category-toggle" type="button" id="categoryToggle" aria-expanded="false" aria-controls="categoryMenu">#</button>
             <div class="category-menu" id="categoryMenu" hidden>
-              <button type="button" data-category="繝ｩ繝ｼ繝｡繝ｳ">繝ｩ繝ｼ繝｡繝ｳ</button>
-              <button type="button" data-category="蟇ｿ蜿ｸ">蟇ｿ蜿ｸ</button>
-              <button type="button" data-category="繧ｫ繝輔ぉ">繧ｫ繝輔ぉ</button>
-              <button type="button" data-category="螳夐｣">螳夐｣</button>
+              <button type="button" data-category="ラーメン">ラーメン</button>
+              <button type="button" data-category="寿司">寿司</button>
+              <button type="button" data-category="カフェ">カフェ</button>
+              <button type="button" data-category="定食">定食</button>
             </div>
           </div>
         </div>
 
         <div class="feed" id="feed"></div>
-        <p class="empty-state" id="emptyState" hidden>縺ｾ縺陦ｨ遉ｺ縺ｧ縺阪ｋ謚慕ｨｿ縺後≠繧翫∪縺帙ｓ縲・/p>
+        <p class="empty-state" id="emptyState" hidden>表示できる投稿がまだありません。</p>
       </section>
 
       <section class="notifications" id="notificationsSection" aria-label="Notifications">
@@ -274,24 +274,24 @@
       <section class="settings" id="settingsSection" aria-label="Settings">
         <div class="section-heading">
           <p class="eyebrow">Settings</p>
-          <h2>險ｭ螳・/h2>
+          <h2>設定</h2>
         </div>
         <div class="settings-grid">
           <label class="setting-card">
             <input id="soundTogglePanel" type="checkbox" />
             <span>
-              <strong>蜉ｹ譫憺浹</strong>
-              <small>縺・＞縺ｭ縲√ｂ縺舌ｂ縺舌∵兜遞ｿ縺ｮ縺ｨ縺阪↓蟆上＆縺ｪ髻ｳ繧帝ｳｴ繧峨＠縺ｾ縺吶・/small>
+              <strong>効果音</strong>
+              <small>いいねや投稿のときに小さな音を鳴らします。</small>
             </span>
           </label>
           <button class="setting-card button-card" type="button" id="chromeTogglePanel">
-            <strong>荳翫・逕ｻ髱｢繧帝國縺・陦ｨ遉ｺ</strong>
-            <small>縲後ｂ縺舌Ο繧ｰ縲阪梧兜遞ｿ縺吶ｋ縲阪悟炎髯､縺吶ｋ縲阪・繝舌・繧貞・繧頑崛縺医∪縺吶・/small>
+            <strong>上部メニューの表示切替</strong>
+            <small>ヘッダーとナビゲーションの表示を切り替えます。</small>
           </button>
         </div>
         <div class="legal-links">
-          <a href="terms.html">蛻ｩ逕ｨ隕冗ｴ・/a>
-          <a href="privacy.html">繝励Λ繧､繝舌す繝ｼ繝昴Μ繧ｷ繝ｼ</a>
+          <a href="terms.html">利用規約</a>
+          <a href="privacy.html">プライバシーポリシー</a>
         </div>
       </section>
     </main>
@@ -309,7 +309,7 @@
           <p></p>
           <div class="post-location" hidden>
             <strong class="shop-name"></strong>
-            <a class="map-link" href="#" target="_blank" rel="noreferrer">蝨ｰ蝗ｳ繧定ｦ九ｋ</a>
+            <a class="map-link" href="#" target="_blank" rel="noreferrer">地図を見る</a>
           </div>
           <div class="comment-list"></div>
           <form class="comment-form">
@@ -317,25 +317,25 @@
             <button class="comment-submit" type="submit">送信</button>
           </form>
           <div class="post-actions">
-            <button class="like-button" type="button" aria-label="縺・＞縺ｭ縺吶ｋ">
-              <span class="heart">笙｡</span>
+            <button class="like-button" type="button" aria-label="いいねする">
+              <span class="heart">♡</span>
               <span class="like-count">0</span>
             </button>
-            <button class="boost-button" type="button" aria-label="繧ゅ＄繧ゅ＄縺吶ｋ">
-              <span>繧ゅ＄</span>
+            <button class="boost-button" type="button" aria-label="もぐもぐする">
+              <span>もぐ</span>
               <span class="boost-count">0</span>
             </button>
-            <button class="share-button" type="button">蜈ｱ譛・/button>
+            <button class="share-button" type="button">共有</button>
             <button class="save-button" type="button">保存</button>
             <button class="report-button" type="button">通報</button>
-            <button class="delete-button" type="button">蜑企勁</button>
+            <button class="delete-button" type="button">削除</button>
           </div>
         </div>
       </article>
     </template>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="supabase-config.js?v=20260516-cloudflare"></script>
-    <script src="app.js?v=20260516-cloudflare"></script>
+    <script src="supabase-config.js?v=20260516-google-only-3"></script>
+    <script src="app.js?v=20260516-google-only-3"></script>
   </body>
 </html>

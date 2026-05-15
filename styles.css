@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   color-scheme: light;
   --ink: #24201c;
   --muted: #71685f;
@@ -938,7 +938,7 @@ textarea:focus {
   }
 }
 
-/* Migrated social/profile UI from gohan-log latest. */
+/* Social/profile UI */
 .intro-actions {
   display: flex;
   flex-wrap: wrap;
@@ -959,45 +959,20 @@ textarea:focus {
 }
 
 .ranking-button.soft {
-  color: #fffaf2;
   background: rgba(255, 250, 242, 0.22);
 }
 
 .ranking-button.is-active {
-  background: var(--gold);
   color: var(--ink);
+  background: var(--gold);
 }
 
-.intro-counter {
-  display: grid;
-  place-items: center;
 .search-tools {
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr) 48px;
   gap: 10px;
   width: min(430px, 100%);
-}
-
-.search-box {
-  position: relative;
-  width: 100%;
-}
-
-.search-box span {
-  color: var(--muted);
-  font-size: 12px;
-}
-
-.search-box input {
-  padding-left: 42px;
-  background:
-    radial-gradient(circle at 20px 50%, var(--pink) 0 5px, transparent 6px),
-    #fffdf8;
-}
-
-.search-box:focus-within {
-  transform: translateY(-1px);
 }
 
 .category-toggle {
@@ -1038,28 +1013,35 @@ textarea:focus {
 .category-menu button {
   min-height: 42px;
   color: var(--ink);
-  background: linear-gradient(135deg, #fffaf8, var(--mint));
-  border: 1px solid rgba(79, 127, 104, 0.16);
+  background: #fffaf8;
+  border: 1px solid rgba(73, 107, 85, 0.16);
   border-radius: 999px;
   cursor: pointer;
   font-weight: 900;
 }
 
-.feed {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
-  gap: 18px;
+.notifications,
+.profile {
+  margin-top: 24px;
+  padding: clamp(18px, 4vw, 28px);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 12px 28px rgba(60, 43, 28, 0.08);
 }
 
 .notice-list {
   display: grid;
+  gap: 12px;
+}
+
 .notice-crown {
   display: grid;
   gap: 10px;
   margin-bottom: 14px;
   padding: 16px;
-  background: linear-gradient(135deg, #fffefb, var(--peach));
-  border: 1px solid rgba(238, 120, 111, 0.18);
+  background: #fffefb;
+  border: 1px solid rgba(217, 168, 66, 0.24);
   border-radius: 8px;
   box-shadow: 0 12px 24px rgba(105, 75, 52, 0.08);
 }
@@ -1080,9 +1062,7 @@ textarea:focus {
 
 .notice-item {
   display: grid;
-  grid-template-columns: 42px minmax(0, 1fr);
-  gap: 12px;
-  align-items: start;
+  gap: 4px;
   padding: 14px;
   color: var(--ink);
   background: #fffefb;
@@ -1091,23 +1071,7 @@ textarea:focus {
   line-height: 1.7;
 }
 
-.notice-item > span {
-  display: grid;
-  place-items: center;
-  width: 42px;
-  height: 42px;
-  background: var(--mint);
-  border-radius: 50%;
-  font-weight: 900;
-}
-
-.notice-item strong {
-  display: block;
-}
-
-.notice-item p {
-  min-height: 0;
-  margin: 2px 0 0;
+.notice-item span {
   color: var(--muted);
 }
 
@@ -1134,10 +1098,6 @@ textarea:focus {
   font-weight: 900;
 }
 
-.profile-avatar.is-royal {
-  background: linear-gradient(135deg, var(--gold), var(--tomato));
-}
-
 .royal-badge,
 .post-royal-badge {
   display: inline-flex;
@@ -1154,11 +1114,8 @@ textarea:focus {
   font-weight: 900;
 }
 
-.royal-badge.is-royal,
-.post-royal-badge {
-  color: #fffaf2;
-  background: linear-gradient(135deg, var(--gold), var(--tomato));
-  border-color: transparent;
+.post-royal-badge[hidden] {
+  display: none;
 }
 
 .profile-card p {
@@ -1178,8 +1135,8 @@ textarea:focus {
   min-height: 30px;
   padding: 6px 10px;
   color: var(--moss);
-  background: rgba(79, 127, 104, 0.1);
-  border: 1px solid rgba(79, 127, 104, 0.16);
+  background: rgba(73, 107, 85, 0.1);
+  border: 1px solid rgba(73, 107, 85, 0.16);
   border-radius: 999px;
   font-size: 12px;
   font-weight: 900;
@@ -1188,41 +1145,6 @@ textarea:focus {
 #profileStats {
   color: var(--tomato);
   font-weight: 900;
-}
-
-.profile-progress {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-  margin-top: 14px;
-}
-
-.progress-card {
-  display: grid;
-  gap: 10px;
-  padding: 14px;
-  background: #fffefb;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  box-shadow: 0 10px 22px rgba(105, 75, 52, 0.06);
-}
-
-.progress-card div:first-child {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-}
-
-.progress-card span {
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 900;
-}
-
-.progress-card strong {
-  color: var(--ink);
-  font-size: 14px;
 }
 
 .gauge-track {
@@ -1239,10 +1161,6 @@ textarea:focus {
   background: linear-gradient(135deg, var(--tomato), #f4b07f);
   border-radius: inherit;
   transition: width 240ms ease;
-}
-
-.crown-progress .gauge-track span {
-  background: linear-gradient(135deg, var(--gold), var(--tomato));
 }
 
 .profile-dashboard {
@@ -1285,88 +1203,31 @@ textarea:focus {
 
 .mini-feed .post-card {
   box-shadow: none;
+}
+
 .post-card.is-compact .report-button,
 .post-card.is-compact .comment-form,
 .post-card.is-compact .delete-button {
   display: none;
-.post-royal-badge[hidden] {
-  display: none;
 }
 
-.post-card h3 {
-  margin: 10px 0 8px;
-  font-size: 19px;
-  line-height: 1.35;
-}
-
-.post-card p {
-  min-height: 52px;
-  margin: 0;
-  color: var(--muted);
-  line-height: 1.7;
-}
-
-.like-button,
-.boost-button,
 .save-button,
 .report-button,
-.delete-button {
+.comment-submit {
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.save-button,
+.report-button {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   min-height: 40px;
   margin-top: 14px;
   padding: 0 13px;
-}
-
-.like-button {
-  color: #a33c4a;
-  background: #fff0f3;
-  border: 1px solid #f6cbd0;
-  transition: transform 160ms ease, background 160ms ease, color 160ms ease;
-}
-
-.like-button:hover {
-  transform: translateY(-2px) scale(1.02);
-}
-
-.like-button.is-liked {
-  color: #fffaf2;
-  background: linear-gradient(135deg, var(--tomato), #f49b7e);
-}
-
-.like-button.is-popping {
-  animation: pop 360ms ease;
-}
-
-.boost-button {
-  color: #7d5729;
-  background: rgba(228, 174, 70, 0.18);
-  border: 1px solid rgba(217, 168, 66, 0.34);
-  transition: transform 160ms ease, background 160ms ease, color 160ms ease;
-}
-
-.boost-button:hover {
-  transform: translateY(-2px) rotate(-1deg);
-}
-
-.boost-button.is-boosted {
-  color: #fffaf2;
-  background: linear-gradient(135deg, var(--gold), #f0c66a);
-}
-
-.boost-button.is-popping {
-  animation: pop 360ms ease;
-}
-
-.heart {
-  font-size: 18px;
-  line-height: 1;
-}
-
-.delete-button {
-  color: #fffaf2;
-  background: #7b7168;
 }
 
 .report-button {
@@ -1381,6 +1242,8 @@ textarea:focus {
 }
 
 .save-button {
+  color: var(--moss);
+  background: rgba(73, 107, 85, 0.1);
   border: 1px solid rgba(73, 107, 85, 0.2);
 }
 
@@ -1412,10 +1275,24 @@ textarea:focus {
   margin-top: 10px;
 }
 
-.comment-form input {
+.comment-form input,
+.comment-submit {
   min-height: 40px;
 }
 
 .comment-submit {
-  min-height: 40px;
   padding: 0 12px;
+  color: #fffaf2;
+  background: var(--moss);
+}
+
+@media (max-width: 820px) {
+  .profile-dashboard,
+  .profile-form {
+    grid-template-columns: 1fr;
+  }
+
+  .search-tools {
+    width: 100%;
+  }
+}

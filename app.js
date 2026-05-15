@@ -985,7 +985,7 @@ function createPostCard(post, compact = false) {
   description.textContent = post.description;
   author.textContent = `@${post.author_handle || post.author_name || "mogu"}`;
   time.textContent = formatTime(post.created_at);
-  heart.textContent = post.liked_by_me ? "隨呻ｽ･" : "隨呻ｽ｡";
+  heart.textContent = post.liked_by_me ? "♥" : "♡";
   likeCount.textContent = post.likes_count || 0;
   likeButton.classList.toggle("is-liked", Boolean(post.liked_by_me));
   boostCount.textContent = post.boosts_count || 0;

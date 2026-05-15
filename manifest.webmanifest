@@ -1,7 +1,7 @@
 {
   "name": "もぐログ",
   "short_name": "もぐログ",
-  "description": "おいしかった料理写真を記録して共有するアプリ",
+  "description": "おいしかった料理の写真を記録して共有するアプリ",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

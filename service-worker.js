@@ -1,4 +1,4 @@
-const CACHE_NAME = "mogu-log-v2";
+const CACHE_NAME = "mogu-log-google-only-v3";
 const STATIC_ASSETS = [
   "/",
   "/index.html",
