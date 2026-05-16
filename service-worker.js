@@ -1,4 +1,4 @@
-const CACHE_NAME = "mogu-log-google-only-v5";
+const CACHE_NAME = "mogu-log-profile-ranking-v1";
 const STATIC_ASSETS = [
   "/",
   "/index.html",
@@ -6,6 +6,7 @@ const STATIC_ASSETS = [
   "/app.js",
   "/manifest.webmanifest",
   "/icon.svg",
+  "/assets/mogu-mascot.png",
   "/terms.html",
   "/privacy.html",
 ];

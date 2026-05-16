@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>もぐログ</title>
     <meta name="theme-color" content="#496b55" />
-    <link rel="stylesheet" href="styles.css?v=20260516-google-only-5" />
-    <link rel="manifest" href="manifest.webmanifest?v=20260516-google-only-5" />
+    <link rel="stylesheet" href="styles.css?v=20260516-profile-ranking-1" />
+    <link rel="manifest" href="manifest.webmanifest?v=20260516-profile-ranking-1" />
   </head>
   <body>
     <button class="chrome-toggle" type="button" id="chromeToggle" aria-expanded="true">
@@ -31,13 +31,14 @@
 
     <main class="shell">
       <aside class="app-nav" aria-label="メインメニュー">
-        <button class="nav-button is-active" type="button" data-jump="feed" title="投稿一覧">□</button>
-        <button class="nav-button" type="button" data-jump="composer" title="投稿する">＋</button>
-        <button class="nav-button" type="button" data-jump="search" title="検索">⌕</button>
-        <button class="nav-button" type="button" data-jump="account" title="アカウント">G</button>
-        <button class="nav-button" type="button" data-jump="notifications" title="Notifications">!</button>
-        <button class="nav-button" type="button" data-jump="profile" title="Profile">@</button>
-        <button class="nav-button" type="button" data-jump="settings" title="設定">♪</button>
+        <button class="nav-button is-active" type="button" data-jump="feed" title="投稿一覧"><span class="nav-icon">□</span><span class="nav-label">投稿</span></button>
+        <button class="nav-button" type="button" data-jump="composer" title="投稿する"><span class="nav-icon">＋</span><span class="nav-label">作成</span></button>
+        <button class="nav-button" type="button" data-jump="ranking" title="ランキング"><span class="nav-icon">♕</span><span class="nav-label">ランキング</span></button>
+        <button class="nav-button" type="button" data-jump="search" title="検索"><span class="nav-icon">⌕</span><span class="nav-label">検索</span></button>
+        <button class="nav-button" type="button" data-jump="account" title="アカウント"><span class="nav-icon">G</span><span class="nav-label">ログイン</span></button>
+        <button class="nav-button" type="button" data-jump="notifications" title="Notifications"><span class="nav-icon">!</span><span class="nav-label">通知</span></button>
+        <button class="nav-button" type="button" data-jump="profile" title="Profile"><span class="nav-icon">@</span><span class="nav-label">プロフィール</span></button>
+        <button class="nav-button" type="button" data-jump="settings" title="設定"><span class="nav-icon">♪</span><span class="nav-label">設定</span></button>
       </aside>
 
       <section class="intro">
@@ -139,6 +140,14 @@
               <button class="secondary-button" type="button" id="getLocationButton">現在地を取得</button>
               <span id="locationStatus">位置情報はまだ取得していません。</span>
             </div>
+            <div class="place-finder wide" id="placeFinder" hidden>
+              <iframe id="placeMapPreview" title="現在地周辺のGoogleマップ" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              <div>
+                <strong>お店の予測</strong>
+                <p>現在地の近くで候補を出します。お店名を選ぶと投稿に反映されます。</p>
+                <div class="place-predictions" id="placePredictions"></div>
+              </div>
+            </div>
           </div>
 
           <div class="image-editor wide" id="imageEditor" hidden>
@@ -163,16 +172,17 @@
                 <input id="warmthInput" type="range" min="0" max="40" value="10" />
               </label>
               <label>
-                Text
-                <input id="overlayTextInput" type="text" placeholder="Mogu!" />
+                画像に入れる文字
+                <input id="overlayTextInput" type="text" placeholder="例: 今日のごほうび" maxlength="42" />
               </label>
               <label>
-                Stamp
+                スタンプ
                 <select id="stampSelect">
-                  <option value="">None</option>
-                  <option value="*">*</option>
-                  <option value="heart">heart</option>
-                  <option value="hot">hot</option>
+                  <option value="">なし</option>
+                  <option value="spark">Spark</option>
+                  <option value="heart">Heart</option>
+                  <option value="hot">Hot</option>
+                  <option value="mog">mog</option>
                 </select>
               </label>
               <div class="editor-buttons">
@@ -197,18 +207,45 @@
               <span>検索</span>
               <input id="searchInput" type="search" placeholder="料理名・コメント・場所で探す" />
             </label>
-            <button class="category-toggle" type="button" id="categoryToggle" aria-expanded="false" aria-controls="categoryMenu">#</button>
+            <button class="category-toggle" type="button" id="categoryToggle" aria-label="カテゴリを選ぶ" aria-expanded="false" aria-controls="categoryMenu">＋</button>
             <div class="category-menu" id="categoryMenu" hidden>
               <button type="button" data-category="ラーメン">ラーメン</button>
               <button type="button" data-category="寿司">寿司</button>
               <button type="button" data-category="カフェ">カフェ</button>
               <button type="button" data-category="定食">定食</button>
+              <button type="button" data-category="焼肉">焼肉</button>
+              <button type="button" data-category="カレー">カレー</button>
+              <button type="button" data-category="パスタ">パスタ</button>
+              <button type="button" data-category="ピザ">ピザ</button>
+              <button type="button" data-category="ハンバーガー">ハンバーガー</button>
+              <button type="button" data-category="スイーツ">スイーツ</button>
+              <button type="button" data-category="パン">パン</button>
+              <button type="button" data-category="和食">和食</button>
+              <button type="button" data-category="中華">中華</button>
+              <button type="button" data-category="韓国料理">韓国料理</button>
+              <button type="button" data-category="居酒屋">居酒屋</button>
+              <button type="button" data-category="弁当">弁当</button>
+              <button type="button" data-category="朝ごはん">朝ごはん</button>
+              <button type="button" data-category="ランチ">ランチ</button>
+              <button type="button" data-category="ディナー">ディナー</button>
+              <button type="button" data-category="テイクアウト">テイクアウト</button>
             </div>
           </div>
         </div>
 
         <div class="feed" id="feed"></div>
         <p class="empty-state" id="emptyState" hidden>表示できる投稿がまだありません。</p>
+      </section>
+
+      <section class="ranking-section" id="rankingSection" aria-label="ランキング">
+        <div class="section-heading feed-heading">
+          <div>
+            <p class="eyebrow">Ranking</p>
+            <h2>いいねランキング</h2>
+          </div>
+        </div>
+        <div class="feed" id="rankingFeed"></div>
+        <p class="empty-state" id="rankingEmptyState" hidden>ランキングに表示できる投稿がまだありません。</p>
       </section>
 
       <section class="notifications" id="notificationsSection" aria-label="Notifications">
@@ -218,11 +255,16 @@
         </div>
         <div class="notice-crown">
           <div>
-            <span>Progress</span>
-            <strong id="noticeCrownText">0 / 10</strong>
+            <span id="noticeCrownLevel">Crown Lv.0</span>
+            <strong id="noticeCrownText">0 / 10 likes</strong>
           </div>
           <div class="gauge-track"><span id="noticeCrownGauge"></span></div>
-          <p id="noticeCrownHint">いいねやリツイートが増えるとここに反映されます。</p>
+          <p id="noticeCrownHint">自分の投稿にもらったいいねが10増えるたびに王冠レベルが上がります。</p>
+          <div class="crown-detail" id="noticeCrownDetail">
+            <span>Lv.1: 10いいね</span>
+            <span>Lv.2: 20いいね</span>
+            <span>Lv.3: 30いいね</span>
+          </div>
         </div>
         <div class="notice-list" id="noticeList"></div>
       </section>
@@ -256,6 +298,7 @@
             <label class="wide">自己紹介<textarea id="profileBioInput" placeholder="好きなごはん、投稿スタイルなど"></textarea></label>
             <label>よく行くエリア<input id="profileAreaInput" type="text" placeholder="渋谷・原宿" /></label>
             <label>好きなジャンル<input id="profileFoodInput" type="text" placeholder="ラーメン" /></label>
+            <label class="wide">アイコン画像<input id="avatarInput" type="file" accept="image/*" /></label>
             <button class="primary-button" type="submit">保存</button>
           </form>
           <div class="profile-column">
@@ -306,11 +349,20 @@
           </label>
         </div>
         <div class="legal-links">
-          <a href="terms.html">利用規約</a>
-          <a href="privacy.html">プライバシーポリシー</a>
+          <button type="button" data-legal="terms">利用規約</button>
+          <button type="button" data-legal="privacy">プライバシーポリシー</button>
         </div>
       </section>
     </main>
+
+    <dialog class="legal-dialog" id="legalDialog" aria-labelledby="legalDialogTitle">
+      <div class="legal-dialog-card">
+        <button class="legal-close" type="button" id="legalCloseButton" aria-label="閉じる">×</button>
+        <p class="eyebrow" id="legalDialogLabel">Legal</p>
+        <h2 id="legalDialogTitle">利用規約</h2>
+        <div class="legal-dialog-body" id="legalDialogBody"></div>
+      </div>
+    </dialog>
 
     <template id="postTemplate">
       <article class="post-card">
@@ -337,21 +389,21 @@
               <span class="heart">♡</span>
               <span class="like-count">0</span>
             </button>
-            <button class="boost-button" type="button" aria-label="もぐもぐする">
-              <span>もぐ</span>
+            <button class="boost-button" type="button" aria-label="mogする">
+              <span>mog</span>
               <span class="boost-count">0</span>
             </button>
-            <button class="share-button" type="button">共有</button>
-            <button class="save-button" type="button">保存</button>
-            <button class="report-button" type="button">通報</button>
-            <button class="delete-button" type="button">削除</button>
+            <button class="share-button" type="button"><span>↗</span><span>共有</span></button>
+            <button class="save-button" type="button"><span>▣</span><span class="save-label">保存</span></button>
+            <button class="report-button" type="button"><span>!</span><span class="report-label">通報</span></button>
+            <button class="delete-button" type="button"><span>×</span><span>削除</span></button>
           </div>
         </div>
       </article>
     </template>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="supabase-config.js?v=20260516-google-only-5"></script>
-    <script src="app.js?v=20260516-google-only-5"></script>
+    <script src="supabase-config.js?v=20260516-profile-ranking-1"></script>
+    <script src="app.js?v=20260516-profile-ranking-1"></script>
   </body>
 </html>
